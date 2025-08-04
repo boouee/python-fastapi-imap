@@ -23,18 +23,18 @@ async def imap_handler():
               print(len(html))
               print("Name" in html)
               name = re.findall("Name:(.*)<br>", html)
-              name = "" if name is None else name[0]
+              name = "" if not name else name[0]
               phone = re.findall("Phone:(.*)<br>", html)
-              phone = "" if phone is None else phone[0]
+              phone = "" if not phone else phone[0]
               email = re.findall("Email:(.*)<br>", html)
               if len(email) < 1:
                  email = re.findall("Textarea:(.*)<br>", html)
-                 email = "" if email is None else email[0]
+                 email = "" if not email else email[0]
               else:
                  email = email[0]
               print(name, phone, email)
               comments = re.findall("Input:(.*)<br>", html)
-              comments = "" if comments is None else comments[0]
+              comments = "" if not comments else comments[0]
               input_2 = re.findall("Input_2:(.*)<br>", html)
               if len(input_2) > 0:
                 comments += ("\n" + input_2[0])
