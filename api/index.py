@@ -5,11 +5,11 @@ from api.new_comment_handler import new_comment_handler
 from urllib.parse import unquote, urlparse
 from pydantic import BaseModel
 
-class Body(BaseModel):
-    data: Data
-
 class Data(BaseModel):
     ID: int
+
+class Body(BaseModel):
+    data: Data
     
 app = FastAPI()
 
