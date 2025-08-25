@@ -9,6 +9,7 @@ server = "mail.netangels.ru"
 #name - UF_CRM_1723114789182
 #phone - UF_CRM_1723114796732
 api = "https://b24-d1uwq7.bitrix24.ru/rest/1/lh1jmrsp8p01x3j3/"
+block_id_values = {'rec1158004176':  , 'rec1151357361': , '#rec1206105936': , '#rec860376858': }
 # Get date, subject and body len of all emails from INBOX folder
 async def imap_handler():
     with MailBox(server).login(address, password) as mailbox:
@@ -33,6 +34,9 @@ async def imap_handler():
               else:
                  email = email[0]
               print(name, phone, email)
+              block_ID = re.findall("Block ID:(.*)<br>", html)
+              block_ID = "" if not block_ID else block_ID[0]
+              
               comments = re.findall("Input:(.*)<br>", html)
               comments = "" if not comments else comments[0]
               input_2 = re.findall("Input_2:(.*)<br>", html)
@@ -47,7 +51,7 @@ async def imap_handler():
 
 async def create_deal(name, phone, email, comments):
     async with httpx.AsyncClient() as client:
-        data = {"fields": {"TITLE": name, "CATEGORY_ID": 12, "UF_CRM_1723114789182": name, "UF_CRM_1723114805999": email, "UF_CRM_1723114796732": phone, "COMMENTS": comments, "ASSIGNED_BY_ID": 1  }}
+        data = {"fields": {"TITLE": name, "CATEGORY_ID": 12, "UF_CRM_1723114789182": name, "UF_CRM_1723114805999": email, "UF_CRM_1723114796732": phone, "COMMENTS": comments, "ASSIGNED_BY_ID": 1, "SOURCE_ID": 572  }}
         response = await client.post(f"{api}crm.deal.add", json=data)
         print(response.json())
 
