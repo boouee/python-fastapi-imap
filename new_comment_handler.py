@@ -1,6 +1,6 @@
 import httpx
 
-async def new_comment_handler(request):
+async def new_comment_handler(comment):
   async with httpx.AsyncClient() as client:
     company = await get_company(client, comment)
     await send_notification(client, company)
