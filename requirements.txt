@@ -5,3 +5,4 @@ packaging
 redis
 emoji
 imap-tools
+pydantic
