@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request,Form
 #from tgbot.main import tgbot
 from api.imap_handler import imap_handler
 from api.new_comment_handler import new_comment_handler
@@ -23,10 +23,10 @@ async def update(request: Request):
 
 
 @app.post('/api/new-comment')
-async def update(request: Request, data[FIELDS][ID]: int = Form(...)):    
+async def update(request: Request):    
     try:
-        body = await request.body()
-        print(data[FIELDS][ID], body.decode())
+        form = await request.form()
+        print(form)
         await new_comment_handler(data["data"]["ID"])
     except Exception as e:
         print(e)
