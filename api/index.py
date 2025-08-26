@@ -27,6 +27,7 @@ async def update(request: Request):
     try:
         form = await request.form()
         print(form)
+        print(form['data[FIELDS][ID]'])
         await new_comment_handler(data["data"]["ID"])
     except Exception as e:
         print(e)
