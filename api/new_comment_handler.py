@@ -1,5 +1,7 @@
 import httpx
 
+api = "https://b24-d1uwq7.bitrix24.ru/rest/1/2ylw0cg8hm7u5ef4/"
+
 async def new_comment_handler(comment):
   async with httpx.AsyncClient() as client:
     company = await get_company(client, comment)
