@@ -28,6 +28,6 @@ async def update(request: Request):
         form = await request.form()
         print(form)
         print(form['data[FIELDS][ID]'])
-        await new_comment_handler(data["data"]["ID"])
+        await new_comment_handler(form['data[FIELDS][ID]'])
     except Exception as e:
         print(e)
