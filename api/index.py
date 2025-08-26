@@ -23,10 +23,10 @@ async def update(request: Request):
 
 
 @app.post('/api/new-comment')
-async def update(body: Body):
-    print(body)
+async def update(request: Request):
+    print(request.json())
     try:
         ...
-        await new_comment_handler(body["data"]["ID"])
+        await new_comment_handler(request.json()["data"]["ID"])
     except Exception as e:
         print(e)
