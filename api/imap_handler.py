@@ -47,11 +47,11 @@ async def imap_handler():
               #+ "\n" + re.findall("Input_2:(.*)<br>", html)
               print(name, phone, email, comments)
               mailbox.move(msg.uid, "INBOX.Trash")
-              await create_deal(name, phone, email, comments)
+              await create_deal(name, phone, email, comments, block_ID)
             except Exception as e:
               print(e)
 
-async def create_deal(name, phone, email, comments):
+async def create_deal(name, phone, email, comments, block_ID):
     async with httpx.AsyncClient() as client:
         data = {"fields": {"TITLE": name, "CATEGORY_ID": 12, "UF_CRM_1723114789182": name, "UF_CRM_1723114805999": email, "UF_CRM_1723114796732": phone, "COMMENTS": comments, "ASSIGNED_BY_ID": 1, "SOURCE_ID": block_ID  }}
         response = await client.post(f"{api}crm.deal.add", json=data)
