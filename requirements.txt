@@ -6,3 +6,4 @@ redis
 emoji
 imap-tools
 pydantic
+python-multipart
