@@ -23,10 +23,10 @@ async def update(request: Request):
 
 
 @app.post('/api/new-comment')
-async def update(request: Request):    
+async def update(request: Request, data[FIELDS][ID]: int = Form(...)):    
     try:
         body = await request.body()
-        print(body.decode())
+        print(data[FIELDS][ID], body.decode())
         await new_comment_handler(data["data"]["ID"])
     except Exception as e:
         print(e)
