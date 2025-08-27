@@ -36,8 +36,8 @@ async def imap_handler():
               else:
                  email = email[0]
               print(name, phone, email)
-              block = re.findall("Block ID:([^\\s]*)<br>", html)
-              block = "" if not block else block_values[block[0]]
+              block = re.findall("Block ID:(.*)<br>", html)
+              block = "" if not block else block_values[block[0].strip()]
               
               comments = re.findall("Input:(.*)<br>", html)
               comments = "" if not comments else comments[0]
