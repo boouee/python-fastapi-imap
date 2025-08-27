@@ -9,7 +9,7 @@ server = "mail.netangels.ru"
 #name - UF_CRM_1723114789182
 #phone - UF_CRM_1723114796732
 api = "https://b24-d1uwq7.bitrix24.ru/rest/1/2ylw0cg8hm7u5ef4/"
-block_id_values = {'rec1158004176': 'UC_JJAT3O', 'rec1151357361': 'STORE' , '#rec1206105936': 'WEB' , '#rec860376858': 'UC_LC50KQ' }
+block_id_values = {'rec1158004176': 'UC_JJAT3O', 'rec1151357361': 'STORE' , 'rec1206105936': 'WEB' , 'rec860376858': 'UC_LC50KQ' }
 #block_id_values = {'rec1158004176': '572', 'rec1151357361': '31' , '#rec1206105936': '15' , '#rec860376858': '574' }
 
 # Get date, subject and body len of all emails from INBOX folder
@@ -36,8 +36,8 @@ async def imap_handler():
               else:
                  email = email[0]
               print(name, phone, email)
-              block_ID = re.findall("Block ID:([^\\s]*)<br>", html)
-              block_ID = "" if not block_ID else block_id_values[block_ID[0]]
+              block = re.findall("Block ID:([^\\s]*)<br>", html)
+              block = "" if not block else block_values[block[0]]
               
               comments = re.findall("Input:(.*)<br>", html)
               comments = "" if not comments else comments[0]
@@ -45,15 +45,15 @@ async def imap_handler():
               if len(input_2) > 0:
                 comments += ("\n" + input_2[0])
               #+ "\n" + re.findall("Input_2:(.*)<br>", html)
-              print(name, phone, email, comments)
+              print(name, phone, email, comments, block)
               mailbox.move(msg.uid, "INBOX.Trash")
-              await create_deal(name, phone, email, comments, block_ID)
+              await create_deal(name, phone, email, comments, block)
             except Exception as e:
               print(e)
 
-async def create_deal(name, phone, email, comments, block_ID):
+async def create_deal(name, phone, email, comments, block):
     async with httpx.AsyncClient() as client:
-        data = {"fields": {"TITLE": name, "CATEGORY_ID": 12, "UF_CRM_1723114789182": name, "UF_CRM_1723114805999": email, "UF_CRM_1723114796732": phone, "COMMENTS": comments, "ASSIGNED_BY_ID": 1, "SOURCE_ID": block_ID  }}
+        data = {"fields": {"TITLE": name, "CATEGORY_ID": 12, "UF_CRM_1723114789182": name, "UF_CRM_1723114805999": email, "UF_CRM_1723114796732": phone, "COMMENTS": comments, "ASSIGNED_BY_ID": 1, "SOURCE_ID": block  }}
         response = await client.post(f"{api}crm.deal.add", json=data)
         print(response.json())
 
