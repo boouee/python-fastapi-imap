@@ -9,7 +9,7 @@ server = "mail.netangels.ru"
 #name - UF_CRM_1723114789182
 #phone - UF_CRM_1723114796732
 api = "https://b24-d1uwq7.bitrix24.ru/rest/1/2ylw0cg8hm7u5ef4/"
-block_id_values = {'rec1158004176': 'UC_JJAT3O', 'rec1151357361': 'STORE' , 'rec1206105936': 'WEB' , 'rec860376858': 'UC_LC50KQ' }
+block_id_values = {'rec860405446': 'UC_LC50KQ', 'rec1158004176': 'UC_JJAT3O', 'rec1151357361': 'STORE' , 'rec1206105936': 'WEB' , 'rec860376858': 'UC_LC50KQ' }
 #block_id_values = {'rec1158004176': '572', 'rec1151357361': '31' , '#rec1206105936': '15' , '#rec860376858': '574' }
 
 # Get date, subject and body len of all emails from INBOX folder
