@@ -31,3 +31,13 @@ async def update(request: Request):
         await new_comment_handler(form['data[FIELDS][ID]'])
     except Exception as e:
         print(e)
+
+@app.post('/api/segment')
+async def update(request: Request):    
+    try:
+        json = await request.json()
+        print(json)
+        return json
+    except Exception as e:
+        print(e)
+        return e
